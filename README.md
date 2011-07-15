@@ -1,0 +1,2 @@
+Este proyecto permite compartir las compras del supermercado dentro de tu red social para buscar las mejores ofertas.
+También te ayudará a llevar un registro de gastos con comparativas y a imprimir la lista para las compras del super.
