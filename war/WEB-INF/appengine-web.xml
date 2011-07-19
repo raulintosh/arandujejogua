@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
 	<application>arandujejogua</application>
-	<version>dev</version>
+	<version>devt</version>
 	
 	<!-- Configure java.util.logging -->
 	<system-properties>
@@ -9,7 +9,10 @@
 	</system-properties>
 	
 	<static-files>
-		<include path="images/**" expiration="30d"/>
+		<include path="*" expiration="30d"/>
+		<include path="css/**" expiration="30d"/>
+		<include path="img/**" expiration="30d"/>
+		<include path="js/**" expiration="30d"/>
 	</static-files>
 	
 </appengine-web-app>

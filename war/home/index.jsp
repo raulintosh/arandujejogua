@@ -11,14 +11,25 @@
 <%@ page import="com.google.appengine.api.datastore.Key" %>
 <%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
 
-<html>
-  <head>
-    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
-  </head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-  <body>
+<title>AranduJejogua Beta</title>
+ 
 
-<%
+<link href="http://www.gstatic.com/codesite/ph/17444577587916266307/css/ph_core.css" rel="stylesheet" type="text/css" />
+ <link href="http://code.google.com/css/codesite.pack.04102009.css" rel="stylesheet" type="text/css" />
+  <script language="javascript" src='script/jquery-1.6.min.js'></script>
+  <script language="javascript" src='script/ajax.util.js'></script>
+</head>
+
+<body>
+
+<div  id="gc-pagecontent" >
+  <h1 class="page_title">Inicio</h1>
+  <%
     String guestbookName = request.getParameter("guestbookName");
     if (guestbookName == null) {
         guestbookName = "default";
@@ -27,55 +38,43 @@
     User user = userService.getCurrentUser();
     if (user != null) {
 %>
-<p>Hello, <%= user.getNickname() %>! (You can
-<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
+<p>Hola, <%= user.getNickname() %>! (Aqu&iacute; puedes
+<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">cerrar sesi&oacute;n</a>.)</p>
 <%
     } else {
 %>
-<p>Hello!
-<a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>
-to include your name with greetings you post.</p>
+<p>Hola!
+<a href="<%= userService.createLoginURL(request.getRequestURI()) %>">inicia sesi&aacute;n</a></p>
 <%
     }
 %>
+ <div id="tabs" class="gtb">
+      <a id="home" href="#home" class="tab">Lista</a>	   
+	  <a id="comparaciones" href="#comparaciones" class="tab">Comparaciones</a> 
+	  <a id="configuracion" href="#configuracion" class="tab">Configuracion</a>	   
+	  <div class="gtbc"></div>
+  </div>
+  <!-- home page content -->
+  <div class="g-unit" id="home-tab">
+  	 <h2>Lista</h2>
+   </div>  
+    <div class="g-unit" id="comparaciones-tab">
+    <h2>Comparaciones</h2>
+   </div>  
+   <div class="g-unit" id="configuracion-tab">
+   <h2>Configuracion</h2>
+   </div>  
+   
+</div>
 
-<%
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    Key guestbookKey = KeyFactory.createKey("Guestbook", guestbookName);
-    // Run an ancestor query to ensure we see the most up-to-date
-    // view of the Greetings belonging to the selected Guestbook.
-    Query query = new Query("Greeting", guestbookKey).addSort("date", Query.SortDirection.DESCENDING);
-    List<Entity> greetings = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(5));
-    if (greetings.isEmpty()) {
-        %>
-        <p>Guestbook '<%= guestbookName %>' has no messages.</p>
-        <%
-    } else {
-        %>
-        <p>Messages in Guestbook '<%= guestbookName %>'.</p>
-        <%
-        for (Entity greeting : greetings) {
-            if (greeting.getProperty("user") == null) {
-                %>
-                <p>An anonymous person wrote:</p>
-                <%
-            } else {
-                %>
-                <p><b><%= ((User) greeting.getProperty("user")).getNickname() %></b> wrote:</p>
-                <%
-            }
-            %>
-            <blockquote><%= greeting.getProperty("content") %></blockquote>
-            <%
-        }
-    }
-%>
 
-    <form action="/sign" method="post">
-      <div><textarea name="content" rows="3" cols="60"></textarea></div>
-      <div><input type="submit" value="Post Greeting" /></div>
-      <input type="hidden" name="guestbookName" value="<%= guestbookName %>"/>
-    </form>
 
-  </body>
+<script type="text/javascript">
+
+ $(window).load(function () {
+   init();
+});
+
+</script>
+</body>
 </html>

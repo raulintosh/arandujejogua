@@ -1,0 +1,169 @@
+<!doctype html>
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+	<title>Login | Tachyon Administration Template</title>
+	
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="copyright" content="">
+	<meta name="author" content="">
+	<meta name="language" content="English">
+	<meta name="robots" content="index, follow">
+	<meta property="fb:page_id" content="XXX"> <!-- XXX = Facebook Fan Page ID -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Icons -->
+	<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+	
+	<!-- CSS Styles -->
+	<link rel="stylesheet" href="css/screen.css">
+	<link rel="stylesheet" href="css/colors.css">
+	<link rel="stylesheet" href="css/jquery.tipsy.css">
+	
+	<!-- Google WebFonts -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700&v2' rel='stylesheet' type='text/css'>
+	
+	<!-- Modernizr adds classes to the <html> element which allow you to target specific browser functionality in your stylesheet -->
+	<script src="js/libs/modernizr-1.7.min.js"></script>
+	
+</head>
+<body class="login">
+	
+	<div class="login-wrapper">
+		
+		<!-- Notification -->
+		<div class="notification error">
+			<a href="#" class="close-notification tooltip" title="Hide Notification">x</a>
+			<h4>Error notification</h4>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vulputate, sapien quis fermentum luctus, libero.</p>
+		</div>
+		<!-- /Notification -->
+		
+		<!-- Full width content box -->
+		<article class="content-box minimizer">
+			<header>
+				<h2>Tachyon Admin</h2>
+				<nav>
+					<p id="logaction">Not a member yet? <a class="regtoggle" href="#">Join us</a>!</p>
+					<p id="regaction">Already a member? <a class="regtoggle" href="#">Log in</a>!</p>
+				</nav>
+			</header>
+			<section>
+				
+				<div id="logform">
+					<form>
+						<dl>
+							<dt>
+								<label>Login</label>
+							</dt>
+							<dd>
+								<input type="text" name="loginName" value="">
+							</dd>
+							<dt>
+								<label>Password</label>
+							</dt>
+							<dd>
+								<input type="password" name="loginPass" value="">
+							</dd>
+							<dt class="checkbox remember"><label>Remember me for a 2 weeks</label></dt>
+							<dd class="remember"><input type="checkbox" name="loginRemeber"></dd>
+						</dl>
+						<button type="submit">Submit</button>
+					</form>
+				</div>
+				<div id="regform">
+					<h3>Create an Account</h3>
+					<form class="vertical-form">
+						<dl>
+							<dt>
+								<label class="mandatory">Username</label>
+							</dt>
+							<dd>
+								<input type="text" name="username" value="">
+							</dd>
+							<dt>
+								<label class="mandatory">Email</label>
+							</dt>
+							<dd>
+								<input type="text" name="email1" value="">
+							</dd>
+							<dt>
+								<label class="mandatory">Confirm email</label>
+							</dt>
+							<dd>
+								<input type="text" name="email2" value="">
+							</dd>
+							<dt>
+								<label class="mandatory">Password</label>
+							</dt>
+							<dd>
+								<input type="password" name="password1" value="">
+							</dd>
+							<dt>
+								<label class="mandatory">Confirm password</label>
+							</dt>
+							<dd>
+								<input type="password" name="password2" value="">
+							</dd>
+							<dt>
+								<label>Textarea</label>
+							</dt>
+							<dd>
+								<textarea rows="5" cols="40" name=""></textarea>
+								<p>Short description of event</p>
+							</dd>
+						</dl>
+						<fieldset>
+							<legend>Check-in some of these</legend>
+							<dl>
+								<dt class="checkbox"><label>Checkbox A</label></dt>
+								<dd class="checkbox"><input type="checkbox"></dd>
+								<dt class="checkbox"><label>Checkbox B</label></dt>
+								<dd class="checkbox"><input type="checkbox"></dd>
+							</dl>
+						</fieldset>
+						<fieldset>
+							<legend>Choose one of these</legend>
+							<dl>
+								<dt class="radio"><label>Option 1</label></dt>
+								<dd class="radio"><input type="radio" name="test"></dd>
+								<dt class="radio"><label>Option 2</label></dt>
+								<dd class="radio"><input type="radio" name="test"></dd>
+							</dl>
+						</fieldset>
+						<button type="submit">Register</button> or <a href="#" class="regtoggle">Cancel, I already have an account</a>
+					</form>
+				</div>
+				
+			</section>
+			<footer>
+				<ul class="login-links">
+					<li><a href="#">Lost password?</a></li>
+					<li><a href="#">Wiki</a></li>
+					<li><a href="#">Back to page</a></li>
+				</ul>
+			</footer>
+		</article>
+		<!-- /Full width content box -->
+		
+	</div>
+
+	<!-- JavaScript at the bottom for faster page loading -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-1.5.1.min.js"%3E%3C/script%3E'))</script>
+	<script src="js/jquery/jquery.tipsy.js"></script>
+	<script src="js/login.js"></script>
+	
+	<script>
+		var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']]; // Change UA-XXXXX-X to be your site's ID
+		(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+		g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+		s.parentNode.insertBefore(g,s)}(document,'script'));
+	</script>
+</body>
+</html>
