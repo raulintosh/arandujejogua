@@ -1,15 +1,27 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.google.appengine.api.users.User" %>
+<%@ page import="com.google.appengine.api.users.UserService" %>
+<%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
+<%@ page import="com.google.appengine.api.datastore.DatastoreServiceFactory" %>
+<%@ page import="com.google.appengine.api.datastore.DatastoreService" %>
+<%@ page import="com.google.appengine.api.datastore.Query" %>
+<%@ page import="com.google.appengine.api.datastore.Entity" %>
+<%@ page import="com.google.appengine.api.datastore.FetchOptions" %>
+<%@ page import="com.google.appengine.api.datastore.Key" %>
+<%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
 <!doctype html>
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
 <!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
 <!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 <head>
-	<title>Tachyon Administration Template</title>
+	<title>AranduJejogua Beta</title>
 	
 	<meta charset="utf-8">
-	<meta name="description" content="">
-	<meta name="keywords" content="">
-	<meta name="author" content="">
+	<meta name="description" content="Comparte con tu red de contactos tus compras y aprende de las compras de ellos.">
+	<meta name="keywords" content="supermercado compartir aprender negociar central compras hogar social red">
+	<meta name="author" content="Raul Giucich">
 	<meta name="robots" content="index, follow">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
@@ -46,27 +58,40 @@
 		<div class="navigation-wrapper">
 		
 			<!-- Your Project Logo -->
-			<a id="logo" href="/" title="Back to Homepage">Your logo</a>
+			<a id="logo" href="/" title="Volver al inicio">Your logo</a>
 			
 			<!-- Main Nav Container -->
 			<nav id="nav-main">
 			
 				<!-- Main Navigation -->
 				<ul id="nav-main-navigation">
-					<li><a href="/" title="">Dashboard</a></li>
-					<li><a href="#submenu-1" title="" class="nav-main-subnav">Projects</a></li>
-					<li><a href="#submenu-2" title="" class="nav-main-subnav">Sales</a><span class="small-notification">3</span></li>
-					<li><a href="#submenu-3" title="" class="nav-main-subnav">Tickets</a></li>
-					<li><a href="#submenu-4" title="" class="nav-main-subnav">Users</a></li>
+					<li><a href="/" title="">INICIO</a></li>
+					<li><a href="#submenu-1" title="" class="nav-main-subnav">Reportes</a></li>
+					<li><a href="#submenu-2" title="" class="nav-main-subnav">Red</a></li>
+					<li><a href="#submenu-3" title="" class="nav-main-subnav">Lugares</a></li>
 				</ul>
 				<!-- /Main Navigation -->
 				
 				<!-- User Navigation -->
 				<ul id="nav-main-user">
-					<li>Welcome, <a href="#" title="">David</a></li>
-					<li><a href="#" title="Messages" class="actions"><img alt="Messages" src="img/icons/icon_user_message.png"></a></li>
-					<li><a href="#" title="Settings" class="actions"><img alt="Settings" src="img/icons/icon_user_settings.png"></a></li>
-					<li><a href="#" title="Logout" class="actions"><img alt="Logout" src="img/icons/icon_user_logout.png"></a></li>
+				 <%
+				    UserService userService = UserServiceFactory.getUserService();
+    				User user = userService.getCurrentUser();
+    				if (user != null) {
+					%>
+						<li>Hola, <a href="#" title=""><%= user.getNickname() %></a></li>
+						<li><a href="#" title="Messages" class="actions"><img alt="Messages" src="img/icons/icon_user_message.png"></a></li>
+						<li><a href="#" title="Settings" class="actions"><img alt="Settings" src="img/icons/icon_user_settings.png"></a></li>
+						<li><a href="<%= userService.createLogoutURL(request.getRequestURI())%>" title="Logout" class="actions"><img alt="Logout" src="img/icons/icon_user_logout.png"></a></li>
+					<%
+					    } else {
+					%>
+						<li>Hola, <a href="<%= userService.createLoginURL(request.getRequestURI()) %>" title="">inicia sesi&oacute;n</a></li>
+					<%
+					    }
+					%>
+				
+					
 				</ul>
 				<!-- /User Navigation -->
 				
@@ -222,51 +247,6 @@
 				</div>
 				<!-- /Sub Nav Block #submenu-3 -->
 				
-				<!-- Sub Nav Block #submenu-4 -->
-				<div id="submenu-4" class="submenu">
-				
-					<!-- Sub Nav Form -->
-					<form class="submenu-form menu-fit">
-						<fieldset>
-							<legend>Lorem ipsum dolor</legend>
-							<dl>
-								<dt class="clear-tm">
-									<label>Login</label>
-								</dt>
-								<dd>
-									<input type="text" name="" value="">
-								</dd>
-								<dt>
-									<label>Password</label>
-								</dt>
-								<dd>
-									<input type="password" name="" value="">
-								</dd>
-							</dl>
-							<button type="submit" class="gray">Submit</button>
-						</fieldset>
-					</form>
-					<!-- /Sub Nav Form -->
-					
-					<article>
-						<h2>Header H2</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et dignissim metus. Maecenas id augue ac metus tempus aliquam.</p>
-						<h3>Header H3</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et dignissim metus. Maecenas id augue ac metus tempus aliquam.</p>
-					</article>
-					
-					<!-- Social Sub Nav List Style -->
-					<ul class="social-list">
-						<li><a class="social rss" href="#">RSS</a></li>
-						<li><a class="social twitter" href="#">Twitter</a></li>
-						<li><a class="social facebook" href="#">Facebook</a></li>
-						<li><a class="social forrst" href="#">Forrst</a></li>
-						<li><a class="social tumblr" href="#">Tumblr</a></li>
-					</ul>
-					<!-- /Social Sub Nav List Style -->
-					
-				</div>
-				<!-- /Sub Nav Block #submenu-4 -->
 				
 			</nav>
 			
@@ -279,28 +259,17 @@
 	
 		<!-- Dashboard -->
 		<section id="dashboard">
-			<h1>Hello! What would you like to do?</h1>
+			<h1>Bienvenido a la Red Social de Administración del Hogar!</h1>
 			
 			<!-- Breadcumbs -->
 			<ul id="breadcrumbs">
-				<li><a href="/" title="Back to Homepage">Home</a></li>
-				<li><a href="#">Projects</a></li>
-				<li><a href="#">Project's Assets</a></li>
-				<li><a href="#">Edit Assets</a></li>
-				<li>Current Page</li>
+				<li><a href="/" title="Inicio">Inicio</a></li>
+				<li><a href="#">Mis Listas</a></li>
+				<li><a href="#">Productos</a></li>
+				<li><a href="#">Lugares de Compra</a></li>
+				<li>P&aacute;gina actual</li>
 			</ul>
 			<!-- /Breadcumbs -->
-			
-			<!-- Nav Shortcuts -->
-			<ul class="shortcuts">
-				<li class="shortcut-contacts"><a href="" title="">Contacts</a></li>
-				<li class="shortcut-sales"><a href="" title="">Sales</a></li>
-				<li class="shortcut-tickets"><a href="" title="">Tickets</a><span class="small-notification">3</span></li>
-				<li class="shortcut-articles"><a href="" title="">Articles</a></li>
-				<li class="shortcut-looong"><a href="" title="">Looooong Shorcut</a></li>
-				<li class="shortcut-settings"><a href="" title="">Settings</a><span class="small-notification">47</span></li>
-			</ul>
-			<!-- /Nav Shortcuts -->
 			
 		</section>
 		<!-- /Dashboard -->

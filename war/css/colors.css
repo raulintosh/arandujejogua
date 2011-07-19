@@ -449,7 +449,7 @@ input.invalid, textarea.invalid { border-color:#ae432e; }
 }
 
 /*  Sample Data  */
-#logo { background-image:url('../img/_sample-data/sample_logo.png'); }
+#logo { }
 
 /*  Sample Shortcuts  */
 .shortcuts .shortcut-contacts a { background-image:url('../img/icons/shortcuts/icon_shortcut_contacts.png'); }

@@ -156,6 +156,7 @@ body.fixed .page-wrapper {
 	margin-right:30px;
 	background-repeat:no-repeat;
 	background-position:0 0;
+	background-image:url('../img/casa.png'); 
 }
 #nav-main { position:relative; }
 #nav-main ul li {
