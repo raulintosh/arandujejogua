@@ -1,6 +1,7 @@
 package org.juru.arandu;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+
+
+
 
 @SuppressWarnings("serial")
 public class ArandujejoguaServlet extends HttpServlet {
