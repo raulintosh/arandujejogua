@@ -23,7 +23,7 @@ public class SignGuestbookServlet extends HttpServlet {
     private static final Logger log =
             Logger.getLogger(SignGuestbookServlet.class.getName());
 
-    public void doPost(HttpServletRequest req, HttpServletResponse resp)
+    public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
         UserService userService = UserServiceFactory.getUserService();
         User user = userService.getCurrentUser();
@@ -35,20 +35,25 @@ public class SignGuestbookServlet extends HttpServlet {
         // This lets us run an ancestor query to retrieve all Greetings for a
         // given Guestbook. However, the write rate to each Guestbook should be
         // limited to ~1/second.
-        String guestbookName = req.getParameter("guestbookName");
-        Key guestbookKey = KeyFactory.createKey("Guestbook", guestbookName);
-        String content = req.getParameter("content");
-        Date date = new Date();
-        Entity greeting = new Entity("Greeting", guestbookKey);
-        greeting.setProperty("user", user);
-        greeting.setProperty("date", date);
-        greeting.setProperty("content", content);
+        
+        Key userKey = KeyFactory.createKey("Users", user.getUserId());
+        Entity test = new Entity("Users",userKey);
+        test.setProperty("email", user.getNickname());
+        test.setProperty("user",user);
+        
+//        String guestbookName = req.getParameter("guestbookName");
+//        Key guestbookKey = KeyFactory.createKey("Guestbook", guestbookName);
+//        String content = req.getParameter("content");
+//        Date date = new Date();
+//        Entity greeting = new Entity("Greeting", guestbookKey);
+//        greeting.setProperty("user", user);
+//        greeting.setProperty("date", date);
+//        greeting.setProperty("content", content);
 
         DatastoreService datastore =
                 DatastoreServiceFactory.getDatastoreService();
-        datastore.put(greeting);
+        datastore.put(test);
 
-        resp.sendRedirect("/home/index.jsp?guestbookName="
-                + guestbookName);
+        resp.sendRedirect("index.jsp");
     }
 }

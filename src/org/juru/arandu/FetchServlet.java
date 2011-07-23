@@ -58,6 +58,8 @@ public class FetchServlet extends HttpServlet {
                                   .print("<a href=\""
                                   + approvalPageUrl
                                   + "\">Invitar a mis amigos</a>");
+            
+            
 
           } catch (OAuthException e) {
                     response.getWriter().print("OAuth Error");

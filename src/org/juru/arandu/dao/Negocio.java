@@ -20,6 +20,8 @@ public class Negocio {
 	private String telefono;
 	private Rubro rubro;
 	private Point latlot;
+	private Users creadopor;
+	
 	public Long getId() {
 		return id;
 	}
@@ -61,6 +63,12 @@ public class Negocio {
 	}
 	public void setLatlot(Point latlot) {
 		this.latlot = latlot;
+	}
+	public Users getCreadopor() {
+		return creadopor;
+	}
+	public void setCreadopor(Users creadopor) {
+		this.creadopor = creadopor;
 	}
 	
 	
