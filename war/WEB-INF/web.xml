@@ -40,6 +40,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     <url-pattern>/auth</url-pattern>
   </servlet-mapping>
 	
+	 <servlet>
+        <servlet-name>settings</servlet-name>
+        <servlet-class>org.juru.arandu.Settings</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>settings</servlet-name>
+        <url-pattern>/settings</url-pattern>
+    </servlet-mapping>
 	
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

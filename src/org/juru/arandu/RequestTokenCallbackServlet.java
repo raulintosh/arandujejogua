@@ -3,6 +3,7 @@ package org.juru.arandu;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -93,30 +94,20 @@ public class RequestTokenCallbackServlet extends HttpServlet {
 
 			UserService userService = UserServiceFactory.getUserService();
 			User user = userService.getCurrentUser();
-			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+			DatastoreService datastore = DatastoreServiceFactory
+					.getDatastoreService();
+			
 			Key userKey = KeyFactory.createKey("Users", user.getUserId());
-			Query query = new Query("Users", userKey);
 			try {
-				
-				Entity u =  datastore.prepare(query).asSingleEntity();
-				
-				@SuppressWarnings("unchecked")
-				List<OauthPermission> permisos = (List<OauthPermission>) u.getProperty("permisos_api");
-				boolean existe = false;
-				for(OauthPermission permiso : permisos){
-					if(permiso.getServicio().equalsIgnoreCase("contact")){
-						existe = true;
-						
-					}
-				}
-				if(!existe){
-					OauthPermission autorizacion = new OauthPermission("contact", accessToken, accessTokenSecret);
-					permisos.add(autorizacion);
-					datastore.put(u);
-				}
-				
+
+				Entity u = new Entity("OauthPermission", userKey);
+				u.setProperty("servicio", "contact");
+				u.setProperty("accessToken", accessToken);
+				u.setProperty("accessTokenSecret", accessTokenSecret);
+				u.setProperty("user", user);
+				datastore.put(u);
 			} finally {
-								
+
 			}
 
 			// Create an instance of the DocsService to make API calls
@@ -130,46 +121,9 @@ public class RequestTokenCallbackServlet extends HttpServlet {
 					"https://www.google.com/m8/feeds/contacts/default/full");
 			ContactFeed resultFeed = client.getFeed(feedUrl, ContactFeed.class);
 			// Print the results
-			out.println(resultFeed.getTitle().getPlainText());
-			for (int i = 0; i < resultFeed.getEntries().size(); i++) {
-				ContactEntry entry = resultFeed.getEntries().get(i);
-				if (entry.hasName()) {
-					Name name = entry.getName();
-					out.println("Nombre: " + name + "\n");
-				} else {
-					out.println("\t (no name found) \n");
-				}
-
-				out.println("Email addresses:");
-				for (Email email : entry.getEmailAddresses()) {
-					out.print(" " + email.getAddress());
-					if (email.getRel() != null) {
-						out.print(" rel:" + email.getRel());
-					}
-					if (email.getLabel() != null) {
-						out.print(" label:" + email.getLabel());
-					}
-					if (email.getPrimary()) {
-						out.print(" (primary) ");
-					}
-					out.print("\n");
-				}
-
-				out.println("Groups:");
-				for (GroupMembershipInfo group : entry
-						.getGroupMembershipInfos()) {
-					String groupHref = group.getHref();
-					out.println("  Id: " + groupHref);
-				}
-
-				Link photoLink = entry.getContactPhotoLink();
-				String photoLinkHref = photoLink.getHref();
-				out.println("<img src='" + photoLinkHref + "'/>");
-
-				if (photoLink.getEtag() != null) {
-					out.println("Contact Photo's ETag: " + photoLink.getEtag());
-				}
-			}
+			
+			req.getSession().setAttribute("resultFeed", resultFeed);
+			resp.sendRedirect("index.jsp");
 
 		} catch (OAuthException e) {
 			// Something went wrong. Usually, you'll end up here if we have
